@@ -19,6 +19,11 @@ import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import JobCreate from "./pages/JobCreate";
+import CandidatesList from "./pages/CandidateList";
+import JobList from "./pages/JobList";
+import CandidateView from "./pages/CandidateView";
+import JobView from "./pages/JobView";
+import CandidateCharts from "./pages/CandidateCharts";
 
 export default function App() {
   return (
@@ -34,10 +39,16 @@ export default function App() {
             <Route path="/profile" element={<UserProfiles />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/blank" element={<Blank />} />
-            <Route path="/jobcreate" element={<JobCreate />} />
+            
+            <Route path="/candidates/:jobId" element={<CandidatesList />} />
+            <Route path="/joblist" element={<JobList />} />
+            <Route path="/view" element={< CandidateView/>} />
+            <Route path="/jobview" element={< JobView/>} />
+            <Route path="/candidate-charts/:candidateID" element={<CandidateCharts />} />
 
             {/* Forms */}
             <Route path="/form-elements" element={<FormElements />} />
+            <Route path="/jobcreate" element={<JobCreate />} />
 
             {/* Tables */}
             <Route path="/basic-tables" element={<BasicTables />} />
@@ -61,6 +72,7 @@ export default function App() {
 
           {/* Fallback Route */}
           <Route path="*" element={<NotFound />} />
+        
         </Routes>
       </Router>
     </>

@@ -44,7 +44,10 @@ const navItems: NavItem[] = [
   {
     name: "Forms",
     icon: <ListIcon />,
-    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
+    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false },
+      { name: "Job Create Page", path: "/jobcreate", pro: false }
+    ],
+    
   },
   {
     name: "Tables",
@@ -56,7 +59,12 @@ const navItems: NavItem[] = [
     icon: <PageIcon />,
     subItems: [
       { name: "Blank Page", path: "/blank", pro: false },
-      { name: "Job Create Page", path: "/jobcreate", pro: false },
+      { name: "Candidates View", path: "/candidates/:jobId", pro: false },
+      { name: "All Candidates", path: "/view", pro: false },
+      { name: "All Jobss", path: "/jobview", pro: false },
+      { name: "Job List", path: "/joblist", pro: false },
+      { name: "Candidate Charts", path: "/candidate-charts/:candidateID", pro: false },
+      
       { name: "404 Error", path: "/error-404", pro: false },
     ],
   },

@@ -19,10 +19,10 @@ export default function DemographicCard() {
       <div className="flex justify-between">
         <div>
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-            Customers Demographic
+            Jobs Location Demographic
           </h3>
           <p className="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
-            Number of customer based on country
+            Number of Job Positions based on country
           </p>
         </div>
         <div className="relative inline-block">
@@ -69,14 +69,14 @@ export default function DemographicCard() {
                 USA
               </p>
               <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                2,379 Customers
+                2,37 opportunities
               </span>
             </div>
           </div>
 
           <div className="flex w-full max-w-[140px] items-center gap-3">
             <div className="relative block h-2 w-full max-w-[100px] rounded bg-gray-200 dark:bg-gray-800">
-              <div className="absolute left-0 top-0 flex h-full w-[79%] items-center justify-center rounded bg-brand-500 text-xs font-medium text-white"></div>
+              <div className="absolute left-0 top-0 flex h-full w-[79%] items-center justify-center rounded bg-[#5C5470] text-xs font-medium text-white"></div>
             </div>
             <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">
               79%
@@ -94,14 +94,14 @@ export default function DemographicCard() {
                 France
               </p>
               <span className="block text-gray-500 text-theme-xs dark:text-gray-400">
-                589 Customers
+                58 opportunities
               </span>
             </div>
           </div>
 
           <div className="flex w-full max-w-[140px] items-center gap-3">
             <div className="relative block h-2 w-full max-w-[100px] rounded bg-gray-200 dark:bg-gray-800">
-              <div className="absolute left-0 top-0 flex h-full w-[23%] items-center justify-center rounded bg-brand-500 text-xs font-medium text-white"></div>
+              <div className="absolute left-0 top-0 flex h-full w-[23%] items-center justify-center rounded bg-[#5C5470] text-xs font-medium text-white"></div>
             </div>
             <p className="font-medium text-gray-800 text-theme-sm dark:text-white/90">
               23%

@@ -8,7 +8,7 @@ import { MoreDotIcon } from "../../icons";
 export default function MonthlyTarget() {
   const series = [75.55];
   const options: ApexOptions = {
-    colors: ["#465FFF"],
+    colors: ["#5C5470"],
     chart: {
       fontFamily: "Outfit, sans-serif",
       type: "radialBar",
@@ -47,7 +47,7 @@ export default function MonthlyTarget() {
     },
     fill: {
       type: "solid",
-      colors: ["#465FFF"],
+      colors: ["#5C5470"],
     },
     stroke: {
       lineCap: "round",
@@ -69,10 +69,10 @@ export default function MonthlyTarget() {
         <div className="flex justify-between">
           <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-              Monthly Target
+              Monthly Candidate's Screening Target
             </h3>
             <p className="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
-              Target you’ve set for each month
+              Target going to set for each month
             </p>
           </div>
           <div className="relative inline-block">
@@ -114,8 +114,7 @@ export default function MonthlyTarget() {
           </span>
         </div>
         <p className="mx-auto mt-10 w-full max-w-[380px] text-center text-sm text-gray-500 sm:text-base">
-          You earn $3287 today, it's higher than last month. Keep up your good
-          work!
+         For a month for a Job Opportunity at HireGenius we are going to screen more than 10000 applications
         </p>
       </div>
 
@@ -125,7 +124,7 @@ export default function MonthlyTarget() {
             Target
           </p>
           <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
-            $20K
+            20K
             <svg
               width="16"
               height="16"
@@ -147,10 +146,10 @@ export default function MonthlyTarget() {
 
         <div>
           <p className="mb-1 text-center text-gray-500 text-theme-xs dark:text-gray-400 sm:text-sm">
-            Revenue
+            Screened
           </p>
           <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
-            $20K
+            5K
             <svg
               width="16"
               height="16"
@@ -175,7 +174,7 @@ export default function MonthlyTarget() {
             Today
           </p>
           <p className="flex items-center justify-center gap-1 text-base font-semibold text-gray-800 dark:text-white/90 sm:text-lg">
-            $20K
+            1K
             <svg
               width="16"
               height="16"

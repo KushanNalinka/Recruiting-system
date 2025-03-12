@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
+import logo from "../assets/images/recruitment-agency-logo-vector.jpg";
+import HireGenius from "../assets/images/hiregenius.png";
 
 // Assume these icons are imported from an icon library
 import {
@@ -29,11 +31,11 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+    subItems: [{ name: "Candidate Insights", path: "/", pro: false }],
   },
   {
     icon: <CalenderIcon />,
-    name: "Calendar",
+    name: "Interview Calendar",
     path: "/calendar",
   },
   {
@@ -50,9 +52,12 @@ const navItems: NavItem[] = [
     
   },
   {
-    name: "Tables",
+    name: "Teams",
     icon: <TableIcon />,
-    subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
+    subItems: [{ name: "Talent Acquisition Teams", path: "/basic-tables", pro: false },
+      { name: "Technical Interview Teams", path: "/basic-tables", pro: false },
+      { name: "HR Interview Teams", path: "/basic-tables", pro: false },
+    ],
   },
   {
     name: "Pages",
@@ -317,14 +322,14 @@ const AppSidebar: React.FC = () => {
             <>
               <img
                 className="dark:hidden"
-                src="/images/logo/logo.svg"
+                src={HireGenius}
                 alt="Logo"
                 width={150}
                 height={40}
               />
               <img
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                src={logo}
                 alt="Logo"
                 width={150}
                 height={40}

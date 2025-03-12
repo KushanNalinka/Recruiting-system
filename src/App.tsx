@@ -25,6 +25,12 @@ import CandidateView from "./pages/CandidateView";
 import JobView from "./pages/JobView";
 import CandidateCharts from "./pages/CandidateCharts";
 import SingleCandidate from "./pages/SingleCandidate";
+import SingleFinalized from "./pages/SingleFinalized";
+
+
+import RankedCandidates from "./pages/RankedCandidates";
+
+
 
 export default function App() {
   return (
@@ -47,6 +53,10 @@ export default function App() {
             <Route path="/jobview" element={< JobView/>} />
             <Route path="/candidate-charts/:candidateID" element={<CandidateCharts />} />
             <Route path="/single/candidate/:id" element={<SingleCandidate />} />
+            <Route path="/single/finalized/candidate/:id" element={<SingleFinalized />} />
+            <Route path="/finalized/ranked/:jobId" element={<RankedCandidates />} />
+            
+            
             
 
             {/* Forms */}

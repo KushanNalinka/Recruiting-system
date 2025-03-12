@@ -65,11 +65,11 @@ const navItems: NavItem[] = [
     icon: <PageIcon />,
     subItems: [
       { name: "Blank Page", path: "/blank", pro: false },
-      { name: "Candidates View", path: "/candidates/:jobId", pro: false },
+   
       { name: "All Candidates", path: "/view", pro: false },
       { name: "All Jobss", path: "/jobview", pro: false },
       { name: "Job List", path: "/joblist", pro: false },
-      { name: "Candidate Charts", path: "/candidate-charts/:candidateID", pro: false },
+     
       
       { name: "404 Error", path: "/error-404", pro: false },
     ],

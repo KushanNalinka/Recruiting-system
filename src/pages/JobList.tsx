@@ -61,6 +61,12 @@ const JobList = () => {
                     >
                       View All Candidates
                     </button>
+                    <button
+                        className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+                        onClick={() => navigate(`/finalized/ranked/${job._id}`)}
+                      >
+                        View Finalized Candidates
+                      </button>
                   </td>
                 </tr>
               ))}

@@ -24,6 +24,7 @@ import JobList from "./pages/JobList";
 import CandidateView from "./pages/CandidateView";
 import JobView from "./pages/JobView";
 import CandidateCharts from "./pages/CandidateCharts";
+import SingleCandidate from "./pages/SingleCandidate";
 
 export default function App() {
   return (
@@ -45,10 +46,13 @@ export default function App() {
             <Route path="/view" element={< CandidateView/>} />
             <Route path="/jobview" element={< JobView/>} />
             <Route path="/candidate-charts/:candidateID" element={<CandidateCharts />} />
+            <Route path="/single/candidate/:id" element={<SingleCandidate />} />
+            
 
             {/* Forms */}
             <Route path="/form-elements" element={<FormElements />} />
             <Route path="/jobcreate" element={<JobCreate />} />
+            <Route path="/cvupload" element={<JobCreate />} />
 
             {/* Tables */}
             <Route path="/basic-tables" element={<BasicTables />} />

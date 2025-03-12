@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
-import logo from "../assets/images/recruitment-agency-logo-vector.jpg";
-import HireGenius from "../assets/images/hiregenius.png";
+
+import darkmodelogo from "../assets/images/darkmodelogo.png";
+import lightmodelogo from "../assets/images/lightmodelogo.jpg";
 
 // Assume these icons are imported from an icon library
 import {
@@ -322,14 +323,14 @@ const AppSidebar: React.FC = () => {
             <>
               <img
                 className="dark:hidden"
-                src={HireGenius}
+                src={lightmodelogo}
                 alt="Logo"
                 width={150}
                 height={40}
               />
               <img
                 className="hidden dark:block"
-                src={logo}
+                src={darkmodelogo}
                 alt="Logo"
                 width={150}
                 height={40}

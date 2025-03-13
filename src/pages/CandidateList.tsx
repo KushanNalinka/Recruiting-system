@@ -145,7 +145,25 @@ const CandidatesList = () => {
       className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
       onClick={() => navigate(`/single/finalized/candidate/${candidate._id}`)}
     >
-      Final
+      Matched
+    </button>
+    <button
+      className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+      onClick={() => navigate(`/${candidate._id}`)}
+    >
+      Linkedin
+    </button>
+    <button
+      className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+      onClick={() => navigate(`/${candidate._id}`)}
+    >
+      GitHub
+    </button>
+    <button
+      className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+      onClick={() => navigate(`/${candidate._id}`)}
+    >
+      Transcript
     </button>
   </div>
 </td>

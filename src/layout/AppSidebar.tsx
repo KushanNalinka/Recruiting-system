@@ -67,7 +67,7 @@ const navItems: NavItem[] = [
       { name: "Blank Page", path: "/blank", pro: false },
    
       { name: "All Candidates", path: "/view", pro: false },
-      { name: "All Jobss", path: "/jobview", pro: false },
+      { name: "All Jobs", path: "/jobview", pro: false },
       { name: "Job List", path: "/joblist", pro: false },
      
       

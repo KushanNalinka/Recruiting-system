@@ -53,7 +53,10 @@ const FinalizedCandidates = () => {
                     <th className="py-2 px-4">First Name</th>
                     <th className="py-2 px-4">Last Name</th>
                     <th className="py-2 px-4">Email</th>
-                    <th className="py-2 px-4">Final Matching Percentage</th>
+                    <th className="py-2 px-4">Predicted Matching Percentage</th>
+                    <th className="py-2 px-4">GitHb/Linkedin/Transcript Matching Percentage</th>
+                    <th className="py-2 px-4">Finalized Matching Percentage</th>
+                    
                   </tr>
                 </thead>
                 <tbody>

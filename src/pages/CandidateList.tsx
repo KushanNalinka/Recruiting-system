@@ -143,25 +143,25 @@ const CandidatesList = () => {
     </button>
     <button
       className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
-      onClick={() => navigate(`/single/finalized/candidate/${candidate._id}`)}
+      onClick={() => navigate(`/single/finalized/${candidate._id}`)}
     >
       Matched
     </button>
     <button
       className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
-      onClick={() => navigate(`/${candidate._id}`)}
+      onClick={() => navigate(`/single/linkedin/${candidate._id}`)}
     >
       Linkedin
     </button>
     <button
       className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
-      onClick={() => navigate(`/${candidate._id}`)}
+      onClick={() => navigate(`/single/github/${candidate._id}`)}
     >
       GitHub
     </button>
     <button
       className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
-      onClick={() => navigate(`/${candidate._id}`)}
+      onClick={() => navigate(`/single/transcript/${candidate._id}`)}
     >
       Transcript
     </button>

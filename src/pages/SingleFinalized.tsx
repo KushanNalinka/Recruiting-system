@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import PageBreadcrumb from "../components/common/PageBreadCrumb";
 import PageMeta from "../components/common/PageMeta";
@@ -9,6 +9,7 @@ const FinalCandidate = () => {
   const [predictedPercentage, setPredictedPercentage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPredictedPercentage = async () => {
@@ -33,6 +34,12 @@ const FinalCandidate = () => {
       <PageBreadcrumb pageTitle="Finalized Candidate" />
 
       <div className="p-6 bg-[#2A2438] text-white min-h-screen flex flex-col items-center">
+      <button
+          className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
+          onClick={() => navigate(-1)}
+        >
+          Go Back
+        </button>
         <h1 className="text-3xl font-bold text-[#DBD8E3] mb-6">Finalized Matching Percentage</h1>
 
         {loading ? (

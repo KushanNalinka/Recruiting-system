@@ -34,9 +34,9 @@ const JobList = () => {
     title="React.js Form Elements Dashboard | TailAdmin - React.js Admin Dashboard Template"
     description="This is React.js Form Elements  Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
   />
-  <PageBreadcrumb pageTitle="Candidates Vies" />
+  <PageBreadcrumb pageTitle="Jobs with Applied Candidates" />
     <div className="p-6 bg-[#2A2438] text-white min-h-screen">
-      <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">Job Listings</h1>
+      <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">Jobs with Applied Candidates</h1>
       <div className="bg-[#352F44] shadow-lg p-4 rounded-lg">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
@@ -54,7 +54,7 @@ const JobList = () => {
                   <td className="py-2 px-4">{job.jobID}</td>
                   <td className="py-2 px-4">{job.jobTitle}</td>
                   <td className="py-2 px-4">{job.jobName}</td>
-                  <td className="py-2 px-4">
+                  <td className="flex gap-2 justify-center ">
                     <button
                       className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
                       onClick={() => navigate(`/candidates/${job._id}`)}
@@ -66,6 +66,12 @@ const JobList = () => {
                         onClick={() => navigate(`/finalized/ranked/${job._id}`)}
                       >
                         View Finalized Candidates
+                      </button>
+                      <button
+                        className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+                        onClick={() => navigate(`/completed/final-ranked/${job._id}`)}
+                      >
+                        View Ranked Candidates
                       </button>
                   </td>
                 </tr>

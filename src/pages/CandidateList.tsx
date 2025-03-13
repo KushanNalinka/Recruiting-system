@@ -87,8 +87,17 @@ const CandidatesList = () => {
     <>
       <PageMeta title="Candidates List" description="Candidates Page" />
       <PageBreadcrumb pageTitle="Candidates Views" />
+      
       <div className="p-6 bg-[#2A2438] text-white min-h-screen">
+        
+        
         <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">Applied Candidates</h1>
+        <button
+          className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
+          onClick={() => navigate(-1)}
+        >
+          Go Back
+        </button>
         {error ? (
           <p className="text-red-400 font-semibold">{error}</p>
         ) : (

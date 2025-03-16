@@ -32,6 +32,7 @@ import RankedCandidates from "./pages/RankedCandidates";
 import GitHubScreen from "./pages/GitHubScreen";
 import LinkedinScreen from "./pages/LinkedinScreen";
 import TranscriptScreen from "./pages/TranscriptScreen";
+import CompletedCandidates from "./pages/CompletedCandidates";
 
 
 
@@ -58,6 +59,7 @@ export default function App() {
             <Route path="/single/candidate/:id" element={<SingleCandidate />} />
             <Route path="/single/finalized/:id" element={<SingleFinalized />} />
             <Route path="/finalized/ranked/:jobId" element={<RankedCandidates />} />
+            <Route path="/completed/final-ranked/:jobId" element={<CompletedCandidates />} />
             <Route path="/single/github/:id" element={<GitHubScreen />} />
             <Route path="/single/linkedin/:id" element={<LinkedinScreen/>} />
             <Route path="/single/transcript/:id" element={<TranscriptScreen />} />

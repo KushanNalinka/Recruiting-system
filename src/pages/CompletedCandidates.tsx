@@ -1,5 +1,5 @@
 // import { useEffect, useState } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
+// import { useParams,useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import PageBreadcrumb from "../components/common/PageBreadCrumb";
 // import PageMeta from "../components/common/PageMeta";
@@ -17,8 +17,8 @@
 //       try {
 //         const response = await axios.get(`http://localhost:5000/candidates/job/${jobId}`);
 //         const sortedCandidates = response.data
-//           .filter((candidate) => candidate.predicted_matching_percentage) // Only include candidates with a final score
-//           .sort((a, b) => b.predicted_matching_percentage - a.predicted_matching_percentage); // Highest score first
+//           .filter((candidate) => candidate.finalized_matching_percentage) // Only include candidates with a final score
+//           .sort((a, b) => b.finalized_matching_percentage - a.finalized_matching_percentage); // Rank highest first
 
 //         setCandidates(sortedCandidates);
 //       } catch (error) {
@@ -37,9 +37,9 @@
 
 //   return (
 //     <>
-//       <PageMeta title="Finalized Candidates" description="List of candidates with final scores" />
-//       <PageBreadcrumb pageTitle="Finalized Candidates" />
-      
+//       <PageMeta title="Finalized Completed Candidates" description="List of candidates with final scores" />
+//       <PageBreadcrumb pageTitle="Finalized Completed Candidates" />
+
 //       <div className="p-6 bg-[#2A2438] text-white min-h-screen">
 //       <button
 //           className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
@@ -47,8 +47,8 @@
 //         >
 //           Go Back
 //         </button>
-//         <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">Finalized Candidates</h1>
-        
+//         <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">Finalized Ranked Completed Candidates</h1>
+
 //         {error ? (
 //           <p className="text-red-400 font-semibold">{error}</p>
 //         ) : (
@@ -57,23 +57,30 @@
 //               <table className="w-full border-collapse">
 //                 <thead>
 //                   <tr className="bg-[#5C5470] text-[#DBD8E3]">
+//                     <th className="py-2 px-4">Rank</th>
 //                     <th className="py-2 px-4">First Name</th>
 //                     <th className="py-2 px-4">Last Name</th>
 //                     <th className="py-2 px-4">Email</th>
-//                     <th className="py-2 px-4">Predicted Matching Percentage</th>
-//                     <th className="py-2 px-4">GitHb/Linkedin/Transcript Matching Percentage</th>
-//                     <th className="py-2 px-4">Finalized Matching Percentage</th>
-                    
+//                     <th className="py-2 px-4">Predicted Matching %</th>
+//                     <th className="py-2 px-4">GitHub/LinkedIn/Transcript Matching %</th>
+//                     <th className="py-2 px-4">Finalized Matching %</th>
 //                   </tr>
 //                 </thead>
 //                 <tbody>
-//                   {currentRecords.map((candidate) => (
+//                   {currentRecords.map((candidate, index) => (
 //                     <tr key={candidate._id} className="border-b border-gray-600 text-[#DBD8E3]">
+//                       <td className="py-2 px-4 font-bold">{index + 1 + (currentPage - 1) * recordsPerPage}</td>
 //                       <td className="py-2 px-4">{candidate.firstName}</td>
 //                       <td className="py-2 px-4">{candidate.lastName}</td>
 //                       <td className="py-2 px-4">{candidate.confirmEmail}</td>
+//                       <td className="py-2 px-4 font-bold text-[#FFA500]">
+//                         {candidate.predicted_matching_percentage || "N/A"}%
+//                       </td>
+//                       <td className="py-2 px-4 font-bold text-[#2196F3]">
+//                         {candidate.github_linkedin_transcript_matching_percentage || "N/A"}%
+//                       </td>
 //                       <td className="py-2 px-4 font-bold text-[#4CAF50]">
-//                         {candidate.predicted_matching_percentage}%
+//                         {candidate.finalized_matching_percentage || "N/A"}%
 //                       </td>
 //                     </tr>
 //                   ))}
@@ -104,6 +111,7 @@
 
 // export default FinalizedCandidates;
 
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -122,9 +130,14 @@ const FinalizedCandidates = () => {
     const fetchFinalizedCandidates = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/candidates/job/${jobId}`);
+
         const sortedCandidates = response.data
-          .filter((candidate) => candidate.predicted_matching_percentage) // Only include candidates with a final score
-          .sort((a, b) => b.predicted_matching_percentage - a.predicted_matching_percentage); // Highest score first
+          .filter((candidate) => candidate.finalized_score) // Only include candidates with a finalized score
+          .map((candidate) => ({
+            ...candidate,
+            github_linkedin_transcript_avg: calculateAverageMarks(candidate), // Calculate avg marks
+          }))
+          .sort((a, b) => b.finalized_score - a.finalized_score); // Rank highest finalized_score first
 
         setCandidates(sortedCandidates);
       } catch (error) {
@@ -135,37 +148,25 @@ const FinalizedCandidates = () => {
     fetchFinalizedCandidates();
   }, [jobId]);
 
-  // Pagination logic
-  const totalPages = Math.ceil(candidates.length / recordsPerPage);
-  const indexOfLastRecord = currentPage * recordsPerPage;
-  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = candidates.slice(indexOfFirstRecord, indexOfLastRecord);
-
   // Function to calculate GitHub/LinkedIn/Transcript Matching Percentage
   const calculateAverageMarks = (candidate) => {
     const githubMarks = candidate.github_marks || 0;
     const linkedinMarks = candidate.linkedin_marks || 0;
     const transcriptMarks = candidate.transcript_marks || 0;
 
-    const averageMarks = (githubMarks + linkedinMarks + transcriptMarks) / 3;
-    return averageMarks.toFixed(2); // Round to 2 decimal places
+    return ((githubMarks + linkedinMarks + transcriptMarks) / 3).toFixed(2); // Round to 2 decimal places
   };
 
-  // Function to call the Finalized Score API
-  const handleFinalizeClick = async (candidateId) => {
-    try {
-      await axios.post(`http://localhost:5000/candidates/finalized_score/${candidateId}`);
-      alert("Finalized Score calculated and updated successfully!");
-      window.location.reload(); // Refresh page after updating score
-    } catch (error) {
-      alert("Failed to calculate Finalized Score.");
-    }
-  };
+  // Pagination logic
+  const totalPages = Math.ceil(candidates.length / recordsPerPage);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = candidates.slice(indexOfFirstRecord, indexOfLastRecord);
 
   return (
     <>
-      <PageMeta title="Finalized Candidates" description="List of candidates with final scores" />
-      <PageBreadcrumb pageTitle="Finalized Candidates" />
+      <PageMeta title="Finalized Completed Candidates" description="List of candidates with final scores" />
+      <PageBreadcrumb pageTitle="Finalized Completed Candidates" />
 
       <div className="p-6 bg-[#2A2438] text-white min-h-screen">
         <button
@@ -174,7 +175,7 @@ const FinalizedCandidates = () => {
         >
           Go Back
         </button>
-        <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">Finalized Candidates</h1>
+        <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">Finalized Ranked Completed Candidates</h1>
 
         {error ? (
           <p className="text-red-400 font-semibold">{error}</p>
@@ -184,33 +185,32 @@ const FinalizedCandidates = () => {
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-[#5C5470] text-[#DBD8E3]">
+                    <th className="py-2 px-4">Rank</th>
                     <th className="py-2 px-4">First Name</th>
                     <th className="py-2 px-4">Last Name</th>
                     <th className="py-2 px-4">Email</th>
-                    <th className="py-2 px-4">Predicted Matching Percentage</th>
-                    <th className="py-2 px-4">GitHb/Linkedin/Transcript Matching Percentage</th>
-                    <th className="py-2 px-4">Finalized Matching Percentage</th>
+                    <th className="py-2 px-4">Predicted Matching %</th>
+                    <th className="py-2 px-4">GitHub/LinkedIn/Transcript Matching %</th>
+                    <th className="py-2 px-4">Finalized Matching %</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {currentRecords.map((candidate) => (
+                  {currentRecords.map((candidate, index) => (
                     <tr key={candidate._id} className="border-b border-gray-600 text-[#DBD8E3]">
+                      <td className="py-2 px-4 font-bold">
+                        {index + 1 + (currentPage - 1) * recordsPerPage}
+                      </td>
                       <td className="py-2 px-4">{candidate.firstName}</td>
                       <td className="py-2 px-4">{candidate.lastName}</td>
                       <td className="py-2 px-4">{candidate.confirmEmail}</td>
-                      <td className="py-2 px-4 font-bold text-[#4CAF50]">
-                        {candidate.predicted_matching_percentage}%
-                      </td>
                       <td className="py-2 px-4 font-bold text-[#FFA500]">
-                        {calculateAverageMarks(candidate)}%
+                        {candidate.predicted_matching_percentage || "N/A"}%
                       </td>
-                      <td className="py-2 px-4">
-                        <button
-                          className="bg-[#DBD8E3] text-black px-3 py-1 rounded-lg hover:bg-[#5C5470] hover:text-white"
-                          onClick={() => handleFinalizeClick(candidate._id)}
-                        >
-                          Finalized
-                        </button>
+                      <td className="py-2 px-4 font-bold text-[#2196F3]">
+                        {candidate.github_linkedin_transcript_avg || "N/A"}%
+                      </td>
+                      <td className="py-2 px-4 font-bold text-[#4CAF50]">
+                        {candidate.finalized_score || "N/A"}%
                       </td>
                     </tr>
                   ))}

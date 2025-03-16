@@ -1,4 +1,4 @@
-
+// @ts-nocheck
 
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -23,8 +23,10 @@ const CandidatesList = () => {
         const sortedCandidates = response.data.sort((a, b) => {
           return (
             b.projectsMatchingSimilarity - a.projectsMatchingSimilarity ||
-            b.workExperienceMatchingSimilarity - a.workExperienceMatchingSimilarity ||
-            b.coursesAndCertificationMatchingSimilarity - a.coursesAndCertificationMatchingSimilarity ||
+            b.workExperienceMatchingSimilarity -
+              a.workExperienceMatchingSimilarity ||
+            b.coursesAndCertificationMatchingSimilarity -
+              a.coursesAndCertificationMatchingSimilarity ||
             b.achievements_similarity - a.achievements_similarity ||
             b.num_of_tools_technologies - a.num_of_tools_technologies
           );
@@ -56,7 +58,11 @@ const CandidatesList = () => {
       setCandidates((prevCandidates) =>
         prevCandidates.map((candidate) =>
           candidate._id === candidateID
-            ? { ...candidate, predicted_matching_percentage: response.data.predicted_matching_percentage }
+            ? {
+                ...candidate,
+                predicted_matching_percentage:
+                  response.data.predicted_matching_percentage,
+              }
             : candidate
         )
       );
@@ -81,14 +87,19 @@ const CandidatesList = () => {
   const totalPages = Math.ceil(candidates.length / recordsPerPage);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = candidates.slice(indexOfFirstRecord, indexOfLastRecord);
+  const currentRecords = candidates.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
 
   return (
     <>
       <PageMeta title="Candidates List" description="Candidates Page" />
       <PageBreadcrumb pageTitle="Candidates Views" />
       <div className="p-6 bg-[#2A2438] text-white min-h-screen">
-        <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">Applied Candidates</h1>
+        <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">
+          Applied Candidates
+        </h1>
         {error ? (
           <p className="text-red-400 font-semibold">{error}</p>
         ) : (
@@ -111,63 +122,93 @@ const CandidatesList = () => {
                 </thead>
                 <tbody>
                   {currentRecords.map((candidate) => (
-                    <tr key={candidate._id} className="border-b border-gray-600 text-[#DBD8E3]">
+                    <tr
+                      key={candidate._id}
+                      className="border-b border-gray-600 text-[#DBD8E3]"
+                    >
                       <td className="py-2 px-4">{candidate.firstName}</td>
                       <td className="py-2 px-4">{candidate.lastName}</td>
                       <td className="py-2 px-4">{candidate.confirmEmail}</td>
-                      <td className="py-2 px-4">{candidate.projectsMatchingSimilarity}</td>
-                      <td className="py-2 px-4">{candidate.workExperienceMatchingSimilarity}</td>
-                      <td className="py-2 px-4">{candidate.coursesAndCertificationMatchingSimilarity}</td>
-                      <td className="py-2 px-4">{candidate.achievements_similarity}</td>
-                      <td className="py-2 px-4">{candidate.num_of_tools_technologies}</td>
-                      <td className="py-2 px-4">{candidate.predicted_matching_percentage || "N/A"}</td>
                       <td className="py-2 px-4">
-  <div className="flex gap-2 justify-center">
-    <button
-      className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
-      onClick={() => handlePredict(candidate._id)}
-    >
-      Predict
-    </button>
-    <button
-      className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
-      onClick={() => handleViewMore(candidate._id)}
-    >
-      Charts
-    </button>
-    <button
-      className="bg-[#5C5470] text-white px-4 py-2 rounded-lg hover:bg-[#DBD8E3] hover:text-black"
-      onClick={() => navigate(`/single/candidate/${candidate._id}`)}
-    >
-      View
-    </button>
-    <button
-      className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
-      onClick={() => navigate(`/single/finalized/${candidate._id}`)}
-    >
-      Matched
-    </button>
-    <button
-      className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
-      onClick={() => navigate(`/single/linkedin/${candidate._id}`)}
-    >
-      Linkedin
-    </button>
-    <button
-      className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
-      onClick={() => navigate(`/single/github/${candidate._id}`)}
-    >
-      GitHub
-    </button>
-    <button
-      className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
-      onClick={() => navigate(`/single/transcript/${candidate._id}`)}
-    >
-      Transcript
-    </button>
-  </div>
-</td>
-
+                        {candidate.projectsMatchingSimilarity}
+                      </td>
+                      <td className="py-2 px-4">
+                        {candidate.workExperienceMatchingSimilarity}
+                      </td>
+                      <td className="py-2 px-4">
+                        {candidate.coursesAndCertificationMatchingSimilarity}
+                      </td>
+                      <td className="py-2 px-4">
+                        {candidate.achievements_similarity}
+                      </td>
+                      <td className="py-2 px-4">
+                        {candidate.num_of_tools_technologies}
+                      </td>
+                      <td className="py-2 px-4">
+                        {candidate.predicted_matching_percentage || "N/A"}
+                      </td>
+                      <td className="py-2 px-4">
+                        <div className="flex gap-2 justify-center">
+                          <button
+                            className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
+                            onClick={() => handlePredict(candidate._id)}
+                          >
+                            Predict
+                          </button>
+                          <button
+                            className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
+                            onClick={() => handleViewMore(candidate._id)}
+                          >
+                            Charts
+                          </button>
+                          <button
+                            className="bg-[#5C5470] text-white px-4 py-2 rounded-lg hover:bg-[#DBD8E3] hover:text-black"
+                            onClick={() =>
+                              navigate(`/single/candidate/${candidate._id}`)
+                            }
+                          >
+                            View
+                          </button>
+                          <button
+                            className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+                            onClick={() =>
+                              navigate(`/single/finalized/${candidate._id}`)
+                            }
+                          >
+                            Matched
+                          </button>
+                          <button
+                            className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+                            onClick={() =>
+                              navigate(`/single/linkedin/${candidate._id}`, {
+                                state: { candidate, jobId },
+                              })
+                            }
+                          >
+                            Linkedin
+                          </button>
+                          <button
+                            className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+                            onClick={() =>
+                              navigate(`/single/github/${candidate._id}`, {
+                                state: { candidate, jobId },
+                              })
+                            }
+                          >
+                            GitHub
+                          </button>
+                          <button
+                            className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#2E7D32]"
+                            onClick={() =>
+                              navigate(`/single/transcript/${candidate._id}`, {
+                                state: { candidate, jobId },
+                              })
+                            }
+                          >
+                            Transcript
+                          </button>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -180,7 +221,11 @@ const CandidatesList = () => {
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               key={index}
-              className={`mx-1 px-3 py-1 rounded-lg ${currentPage === index + 1 ? "bg-[#5C5470] text-white" : "bg-[#DBD8E3] text-black"}`}
+              className={`mx-1 px-3 py-1 rounded-lg ${
+                currentPage === index + 1
+                  ? "bg-[#5C5470] text-white"
+                  : "bg-[#DBD8E3] text-black"
+              }`}
               onClick={() => setCurrentPage(index + 1)}
             >
               {index + 1}

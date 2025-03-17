@@ -101,10 +101,6 @@ const CandidatesList = () => {
         <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">
           Applied Candidates
         </h1>
-
-        <h1 className="text-3xl font-bold text-[#DBD8E3] mb-4">
-          Applied Candidates
-        </h1>
         <button
           className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
           onClick={() => navigate(-1)}

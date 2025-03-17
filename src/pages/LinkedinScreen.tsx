@@ -176,7 +176,7 @@ const LinkedInPage: React.FC = () => {
           id="submitbutton"
           disabled={loading}
           onClick={handleSubmit}
-          className="w-full bg-blue-500 mt-10 text-yellow-700 py-3 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="w-full bg-slate-700 mt-10 text-white py-3 px-4 rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2  focus:ring-offset-2"
         >
           {loading ? (
             <div className="flex items-center justify-center">
@@ -221,10 +221,20 @@ const LinkedInPage: React.FC = () => {
         )}
       </div>
 
-      <ToastContainer position="top-right" autoClose={5000} />
+      <ToastContainer position="bottom-right" autoClose={5000} />
       <div className="mt-10  ">
-        <button onClick={saveResultsToDB}>Save Results to DB</button>
-        <button onClick={() => navigateTo("/")}>Go to Home</button>
+        <button
+          className="px-4 py-2 mr-10 bg-slate-700 text-white font-semibold rounded-lg shadow-md hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          onClick={saveResultsToDB}
+        >
+          Save Results to DB
+        </button>
+        <button
+          className="px-4 py-2 bg-slate-700 text-white font-semibold rounded-lg shadow-md hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          onClick={() => navigateTo("/")}
+        >
+          Go to Home
+        </button>
       </div>
     </div>
   );

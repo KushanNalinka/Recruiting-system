@@ -27,7 +27,7 @@ export async function retrieveContributionData(userName: any) {
     query,
     variables,
   };
-  const TOKEN = "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";
+  const TOKEN = "";
   const res = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
